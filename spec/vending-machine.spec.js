@@ -2,6 +2,11 @@ const VendingMachine = require('../lib/vending-machine');
 
 describe('The vending machine', () => {
 
+    let machine;
+    beforeEach(() => {
+        machine = new VendingMachine();
+    });
+
     const NICKEL = {
         mass: 5,
         diameter: 21.21,
@@ -9,20 +14,17 @@ describe('The vending machine', () => {
     };
 
     it('should display INSERT COIN if no money has been inserted', () => {
-        let machine = new VendingMachine();
         expect(machine.nextMessage).toEqual('INSERT COIN');
     });
 
     describe('accepting nickels', () => {
 
         it('should accept one', () => {
-            let machine = new VendingMachine();
             machine.insertCoin(NICKEL);
             expect(machine.nextMessage).toEqual('$0.05');
         });
 
         it('should accept multiple', () => {
-            let machine = new VendingMachine();
             machine.insertCoin(NICKEL);
             machine.insertCoin(NICKEL);
             machine.insertCoin(NICKEL);
@@ -33,7 +35,6 @@ describe('The vending machine', () => {
             const lightNickel = copyCoin(NICKEL, { mass: 4.9 });
             const heavyNickel = copyCoin(NICKEL, { mass: 5.01 });
 
-            let machine = new VendingMachine();
             machine.insertCoin(NICKEL);
             machine.insertCoin(lightNickel);
             machine.insertCoin(heavyNickel);
