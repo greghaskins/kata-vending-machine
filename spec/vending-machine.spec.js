@@ -41,6 +41,17 @@ describe('The vending machine', () => {
             expect(machine.nextMessage).toEqual('$0.05');
         });
 
+        it('should reject if diameter is incorrect', () => {
+            const bigNickel = copyCoin(NICKEL, { diameter: 23 });
+            const smallNickel = copyCoin(NICKEL, { diameter: 20 });
+
+            machine.insertCoin(NICKEL);
+            machine.insertCoin(bigNickel);
+            machine.insertCoin(NICKEL);
+            machine.insertCoin(smallNickel);
+            expect(machine.nextMessage).toEqual('$0.10');
+        });
+
     });
 
 
