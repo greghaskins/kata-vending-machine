@@ -43,15 +43,29 @@ describe('The vending machine', () => {
 
     });
 
-    it('should return invalid coins', () => {
+
+    describe('coin return', () => {
+
         const bogusCoin1 = copyCoin(NICKEL, { mass: 0.1 });
         const bogusCoin2 = copyCoin(NICKEL, { mass: 0.2 });
 
-        machine.insertCoin(bogusCoin1);
-        machine.insertCoin(bogusCoin2);
-        expect(machine.coinReturn).toContain(bogusCoin1);
-        expect(machine.coinReturn).toContain(bogusCoin2);
+        beforeEach(() => {
+            machine.insertCoin(bogusCoin1);
+            machine.insertCoin(bogusCoin2);
+        });
+
+        it('should keep invalid coins in there', () => {
+            expect(machine.coinReturn).toContain(bogusCoin1);
+            expect(machine.coinReturn).toContain(bogusCoin2);
+        });
+
+        it('should be able to clear', () => {
+            machine.clearCoinReturn();
+            expect(machine.coinReturn.length).toBe(0);
+        });
     });
+
+
 
 });
 
