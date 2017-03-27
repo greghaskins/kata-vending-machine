@@ -1,0 +1,10 @@
+{
+  "name": "kata-vending-machine-js",
+  "version": "1.0.0",
+  "description": "Vending Machine code kata in JavaScript",
+  "main": "index.js",
+  "repository": "https://github.com/greghaskins/kata-vending-machine-js.git",
+  "author": "Gregory Haskins <greg@greghaskins.com>",
+  "license": "MIT",
+  "private": true
+}
