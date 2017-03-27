@@ -43,6 +43,15 @@ describe('The vending machine', () => {
 
     });
 
+    it('should return invalid coins', () => {
+        const bogusCoin1 = copyCoin(NICKEL, { mass: 0.1 });
+        const bogusCoin2 = copyCoin(NICKEL, { mass: 0.2 });
+
+        machine.insertCoin(bogusCoin1);
+        machine.insertCoin(bogusCoin2);
+        expect(machine.coinReturn).toContain(bogusCoin1);
+        expect(machine.coinReturn).toContain(bogusCoin2);
+    });
 
 });
 
