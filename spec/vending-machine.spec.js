@@ -52,6 +52,15 @@ describe('The vending machine', () => {
             expect(machine.nextMessage).toEqual('$0.10');
         });
 
+        it('should reject if thickness is incorrect', () => {
+            const thickNickel = copyCoin(NICKEL, { thickness: 2.0 });
+            const thinNickel = copyCoin(NICKEL, { thickness: 1.9 });
+
+            machine.insertCoin(thickNickel);
+            machine.insertCoin(thinNickel);
+            expect(machine.nextMessage).toEqual('INSERT COIN');
+        });
+
     });
 
 
