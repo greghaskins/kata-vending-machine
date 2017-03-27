@@ -29,7 +29,22 @@ describe('The vending machine', () => {
             expect(machine.nextMessage).toEqual('$0.15');
         });
 
+        it('should reject if mass is incorrect', () => {
+            const lightNickel = copyCoin(NICKEL, { mass: 4.9 });
+            const heavyNickel = copyCoin(NICKEL, { mass: 5.01 });
+
+            let machine = new VendingMachine();
+            machine.insertCoin(NICKEL);
+            machine.insertCoin(lightNickel);
+            machine.insertCoin(heavyNickel);
+            expect(machine.nextMessage).toEqual('$0.05');
+        });
+
     });
 
 
 });
+
+function copyCoin(baseCoin, updates) {
+    return Object.assign({}, baseCoin, updates);
+}
