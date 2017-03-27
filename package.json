@@ -6,5 +6,11 @@
   "repository": "https://github.com/greghaskins/kata-vending-machine-js.git",
   "author": "Gregory Haskins <greg@greghaskins.com>",
   "license": "MIT",
-  "private": true
+  "private": true,
+  "scripts": {
+    "test": "jasmine"
+  },
+  "devDependencies": {
+    "jasmine": "^2.5.3"
+  }
 }

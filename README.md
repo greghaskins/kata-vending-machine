@@ -7,6 +7,13 @@ inventory, and dispense products.  All the things that you might expect a vendin
 The point of this kata to to provide a larger than trivial exercise that can be used to practice TDD.  A significant
 portion of the effort will be in determining what tests should be written and, more importantly, written next.
 
+## Running the build
+
+```sh
+yarn install
+yarn test
+```
+
 Features
 ========
 
