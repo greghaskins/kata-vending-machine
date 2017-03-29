@@ -1,4 +1,5 @@
 const VendingMachine = require('../lib/vending-machine');
+const { NICKEL } = require('./coins');
 
 describe('The vending machine', () => {
 
@@ -6,12 +7,6 @@ describe('The vending machine', () => {
     beforeEach(() => {
         machine = new VendingMachine();
     });
-
-    const NICKEL = {
-        mass: 5,
-        diameter: 21.21,
-        thickness: 1.95
-    };
 
     it('should display INSERT COIN if no money has been inserted', () => {
         expect(machine.nextMessage).toEqual('INSERT COIN');

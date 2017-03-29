@@ -1,16 +1,11 @@
 const CoinAppraiser = require('../lib/coin-appraiser');
+const { NICKEL, DIME, QUARTER } = require('./coins');
 
 describe('the coin appraiser', () => {
 
     const appraiser = new CoinAppraiser();
 
     describe('with nickels', () => {
-
-        const NICKEL = {
-            mass: 5,
-            diameter: 21.21,
-            thickness: 1.95
-        };
 
         it('values them at $0.05', () => {
             expect(appraiser.appraise(NICKEL)).toBe(0.05);
@@ -44,12 +39,6 @@ describe('the coin appraiser', () => {
 
     describe('with dimes', () => {
 
-        const DIME = {
-            mass: 2.268,
-            diameter: 17.91,
-            thickness: 1.35
-        };
-
         it('values them at $0.10', () => {
             expect(appraiser.appraise(DIME)).toBe(0.10);
         });
@@ -81,12 +70,6 @@ describe('the coin appraiser', () => {
     });
 
     describe('with quarters', () => {
-
-        const QUARTER = {
-            mass: 5.670,
-            diameter: 24.26,
-            thickness: 1.75
-        };
 
         it('values them at $0.25', () => {
             expect(appraiser.appraise(QUARTER)).toBe(0.25);
