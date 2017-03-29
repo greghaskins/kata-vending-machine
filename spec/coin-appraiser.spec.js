@@ -80,6 +80,44 @@ describe('the coin appraiser', () => {
 
     });
 
+    describe('with quarters', () => {
+
+        const QUARTER = {
+            mass: 5.670,
+            diameter: 24.26,
+            thickness: 1.75
+        };
+
+        it('values them at $0.25', () => {
+            expect(appraiser.appraise(QUARTER)).toBe(0.25);
+        });
+
+        it('values them at $0 when mass is incorrect', () => {
+            const lightQuarter = copyCoin(QUARTER, { mass: 5.669 });
+            const heavyQuarter = copyCoin(QUARTER, { mass: 5.671 });
+
+            expect(appraiser.appraise(lightQuarter)).toEqual(0.0);
+            expect(appraiser.appraise(heavyQuarter)).toEqual(0.0);
+        });
+
+        it('values them at $0 when diameter is incorrect', () => {
+            const bigQuarter = copyCoin(QUARTER, { diameter: 24.27 });
+            const smallQuarter = copyCoin(QUARTER, { diameter: 24.25 });
+
+            expect(appraiser.appraise(bigQuarter)).toBe(0.0);
+            expect(appraiser.appraise(smallQuarter)).toBe(0.0);
+        });
+
+        it('values them at $0 when thickness is incorrect', () => {
+            const thickQuarter = copyCoin(QUARTER, { thickness: 1.76 });
+            const thinQuarter = copyCoin(QUARTER, { thickness: 1.74 });
+
+            expect(appraiser.appraise(thickQuarter)).toBe(0.0);
+            expect(appraiser.appraise(thinQuarter)).toBe(0.0);
+        });
+
+    });
+
 });
 
 function copyCoin(baseCoin, updates) {
