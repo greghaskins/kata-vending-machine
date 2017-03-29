@@ -93,6 +93,47 @@ describe('The vending machine', () => {
     });
 
 
+    describe('selecting a cola', () => {
+
+        describe('when you have inserted sufficient money', () => {
+
+            beforeEach(() => {
+                machine.insertCoin(QUARTER);
+                machine.insertCoin(QUARTER);
+                machine.insertCoin(QUARTER);
+                machine.insertCoin(QUARTER);
+            });
+
+            it('dispenses a cola', () => {
+                machine.selectProduct('Cola');
+                expect(machine.productChute).toContain('Cola');
+            });
+
+            it('should display THANK YOU');
+            it('should deduct $1.00 from your balance');
+
+        });
+
+        describe('when you have NOT inserted sufficient money', () => {
+
+            beforeEach(() => {
+                machine.insertCoin(QUARTER);
+                machine.insertCoin(QUARTER);
+                machine.insertCoin(QUARTER);
+                machine.insertCoin(DIME);
+                machine.insertCoin(DIME);
+            });
+
+            it('dispenses nothing', () => {
+                machine.selectProduct('Cola');
+                expect(machine.productChute).toEqual([]);
+            });
+
+        });
+
+
+    });
+
 
 });
 
