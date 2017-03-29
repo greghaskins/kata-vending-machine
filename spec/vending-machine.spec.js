@@ -49,6 +49,25 @@ describe('The vending machine', () => {
             expect(machine.coinReturn).toContain(penny);
         });
 
+        it('should reject bogus coins mixed with valid coins', () => {
+            const bogusCoin = {
+                mass: 3,
+                diameter: 18,
+                thickness: 1.5
+            };
+
+            machine.insertCoin(bogusCoin);
+            machine.insertCoin(DIME);
+            machine.insertCoin(QUARTER);
+            machine.insertCoin(bogusCoin);
+            machine.insertCoin(NICKEL);
+            machine.insertCoin(NICKEL);
+
+            expect(machine.nextMessage).toEqual('$0.45');
+            expect(machine.coinReturn).toContain(bogusCoin);
+        });
+
+
     });
 
 
