@@ -49,26 +49,6 @@ describe('The vending machine', () => {
             expect(machine.coinReturn).toContain(penny);
         });
 
-        it('should reject if diameter is incorrect', () => {
-            const bigNickel = copyCoin(NICKEL, { diameter: 23 });
-            const smallNickel = copyCoin(NICKEL, { diameter: 20 });
-
-            machine.insertCoin(NICKEL);
-            machine.insertCoin(bigNickel);
-            machine.insertCoin(NICKEL);
-            machine.insertCoin(smallNickel);
-            expect(machine.nextMessage).toEqual('$0.10');
-        });
-
-        it('should reject if thickness is incorrect', () => {
-            const thickNickel = copyCoin(NICKEL, { thickness: 2.0 });
-            const thinNickel = copyCoin(NICKEL, { thickness: 1.9 });
-
-            machine.insertCoin(thickNickel);
-            machine.insertCoin(thinNickel);
-            expect(machine.nextMessage).toEqual('INSERT COIN');
-        });
-
     });
 
 
