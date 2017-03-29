@@ -1,5 +1,5 @@
 const VendingMachine = require('../lib/vending-machine');
-const { NICKEL } = require('./coins');
+const { NICKEL, DIME, QUARTER } = require('./coins');
 
 describe('The vending machine', () => {
 
@@ -12,28 +12,41 @@ describe('The vending machine', () => {
         expect(machine.nextMessage).toEqual('INSERT COIN');
     });
 
-    describe('accepting nickels', () => {
+    describe('accepting coins', () => {
 
-        it('should accept one', () => {
+        it('should accept one nickel', () => {
             machine.insertCoin(NICKEL);
             expect(machine.nextMessage).toEqual('$0.05');
         });
 
-        it('should accept multiple', () => {
-            machine.insertCoin(NICKEL);
-            machine.insertCoin(NICKEL);
-            machine.insertCoin(NICKEL);
-            expect(machine.nextMessage).toEqual('$0.15');
+        it('should accept one dime', () => {
+            machine.insertCoin(DIME);
+            expect(machine.nextMessage).toEqual('$0.10');
         });
 
-        it('should reject if mass is incorrect', () => {
-            const lightNickel = copyCoin(NICKEL, { mass: 4.9 });
-            const heavyNickel = copyCoin(NICKEL, { mass: 5.01 });
+        it('should accept one quarter', () => {
+            machine.insertCoin(QUARTER);
+            expect(machine.nextMessage).toEqual('$0.25');
+        });
 
+        it('should accept multiple coins', () => {
             machine.insertCoin(NICKEL);
-            machine.insertCoin(lightNickel);
-            machine.insertCoin(heavyNickel);
-            expect(machine.nextMessage).toEqual('$0.05');
+            machine.insertCoin(QUARTER);
+            machine.insertCoin(DIME);
+            machine.insertCoin(QUARTER);
+            expect(machine.nextMessage).toEqual('$0.65');
+        });
+
+        it('should reject a penny', () => {
+            const penny = {
+                mass: 2.5,
+                diameter: 19.05,
+                thickness: 1.52
+            };
+
+            machine.insertCoin(penny);
+            expect(machine.nextMessage).toEqual('INSERT COIN');
+            expect(machine.coinReturn).toContain(penny);
         });
 
         it('should reject if diameter is incorrect', () => {
