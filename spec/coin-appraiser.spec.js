@@ -42,6 +42,44 @@ describe('the coin appraiser', () => {
 
     });
 
+    describe('with dimes', () => {
+
+        const DIME = {
+            mass: 2.268,
+            diameter: 17.91,
+            thickness: 1.35
+        };
+
+        it('values them at $0.10', () => {
+            expect(appraiser.appraise(DIME)).toBe(0.10);
+        });
+
+        it('values them at $0 when mass is incorrect', () => {
+            const lightDime = copyCoin(DIME, { mass: 2.267 });
+            const heavyDime = copyCoin(DIME, { mass: 2.269 });
+
+            expect(appraiser.appraise(lightDime)).toEqual(0.0);
+            expect(appraiser.appraise(heavyDime)).toEqual(0.0);
+        });
+
+        it('values them at $0 when diameter is incorrect', () => {
+            const bigDime = copyCoin(DIME, { diameter: 17.92 });
+            const smallDime = copyCoin(DIME, { diameter: 17.90 });
+
+            expect(appraiser.appraise(bigDime)).toBe(0.0);
+            expect(appraiser.appraise(smallDime)).toBe(0.0);
+        });
+
+        it('values them at $0 when thickness is incorrect', () => {
+            const thickDime = copyCoin(DIME, { thickness: 1.36 });
+            const thinDime = copyCoin(DIME, { thickness: 1.34 });
+
+            expect(appraiser.appraise(thickDime)).toBe(0.0);
+            expect(appraiser.appraise(thinDime)).toBe(0.0);
+        });
+
+    });
+
 });
 
 function copyCoin(baseCoin, updates) {
