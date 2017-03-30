@@ -12,17 +12,28 @@ describe('the product catalog', () => {
 
     });
 
+    describe('chips', () => {
+
+        it('cost $0.50', () => {
+            expect(catalog.priceOf('Chips')).toBe(0.50);
+        });
+
+    });
+
+    describe('candy', () => {
+
+        it('costs $0.50', () => {
+            expect(catalog.priceOf('Candy')).toBe(0.65);
+        });
+
+    });
 
     describe('invalid products', () => {
-
 
         it('throw an error when you try to get their price', () => {
             expect(() => catalog.priceOf('Caviar')).toThrow(new Error('Unknown product: Caviar'));
         });
 
-
     });
-
-
 
 });
