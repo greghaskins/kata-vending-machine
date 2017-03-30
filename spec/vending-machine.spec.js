@@ -93,7 +93,7 @@ describe('The vending machine', () => {
     });
 
 
-    describe('selecting a cola', () => {
+    describe('selecting a product', () => {
 
         describe('when you have inserted exact change', () => {
 
@@ -102,15 +102,15 @@ describe('The vending machine', () => {
                 machine.insertCoin(QUARTER);
                 machine.insertCoin(QUARTER);
                 machine.insertCoin(QUARTER);
+
+                machine.selectProduct('Cola');
             });
 
-            it('dispenses a cola', () => {
-                machine.selectProduct('Cola');
+            it('dispenses the product', () => {
                 expect(machine.productChute).toContain('Cola');
             });
 
             it('should display THANK YOU, then INSERT COIN', () => {
-                machine.selectProduct('Cola');
                 expect(machine.nextMessage).toBe('THANK YOU');
                 expect(machine.nextMessage).toBe('INSERT COIN');
             });
@@ -122,19 +122,17 @@ describe('The vending machine', () => {
             beforeEach(() => {
                 machine.insertCoin(QUARTER);
                 machine.insertCoin(QUARTER);
-                machine.insertCoin(QUARTER);
-                machine.insertCoin(QUARTER);
                 machine.insertCoin(DIME);
                 machine.insertCoin(NICKEL);
+
+                machine.selectProduct('Chips');
             });
 
-            it('dispenses a cola', () => {
-                machine.selectProduct('Cola');
-                expect(machine.productChute).toContain('Cola');
+            it('dispenses the product', () => {
+                expect(machine.productChute).toContain('Chips');
             });
 
             it('should display THANK YOU, then remaining balance', () => {
-                machine.selectProduct('Cola');
                 expect(machine.nextMessage).toBe('THANK YOU');
                 expect(machine.nextMessage).toBe('$0.15');
             });
@@ -146,21 +144,18 @@ describe('The vending machine', () => {
             beforeEach(() => {
                 machine.insertCoin(QUARTER);
                 machine.insertCoin(QUARTER);
-                machine.insertCoin(QUARTER);
                 machine.insertCoin(DIME);
-                machine.insertCoin(DIME);
+
+                machine.selectProduct('Candy');
             });
 
             it('dispenses nothing', () => {
-                machine.selectProduct('Cola');
                 expect(machine.productChute).toEqual([]);
             });
 
             it('should display the price, then the amount tendered', () => {
-                machine.selectProduct('Cola');
-
-                expect(machine.nextMessage).toBe('PRICE $1.00');
-                expect(machine.nextMessage).toBe('$0.95');
+                expect(machine.nextMessage).toBe('PRICE $0.65');
+                expect(machine.nextMessage).toBe('$0.60');
             });
 
 
