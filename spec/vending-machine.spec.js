@@ -117,6 +117,30 @@ describe('The vending machine', () => {
 
         });
 
+        describe('when you have inserted more than enough money', () => {
+
+            beforeEach(() => {
+                machine.insertCoin(QUARTER);
+                machine.insertCoin(QUARTER);
+                machine.insertCoin(QUARTER);
+                machine.insertCoin(QUARTER);
+                machine.insertCoin(DIME);
+                machine.insertCoin(NICKEL);
+            });
+
+            it('dispenses a cola', () => {
+                machine.selectProduct('Cola');
+                expect(machine.productChute).toContain('Cola');
+            });
+
+            it('should display THANK YOU, then remaining balance', () => {
+                machine.selectProduct('Cola');
+                expect(machine.nextMessage).toBe('THANK YOU');
+                expect(machine.nextMessage).toBe('$0.15');
+            });
+
+        });
+
         describe('when you have not inserted enough money', () => {
 
             beforeEach(() => {
