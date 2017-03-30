@@ -132,6 +132,14 @@ describe('The vending machine', () => {
                 expect(machine.productChute).toEqual([]);
             });
 
+            it('should display the price, then the amount tendered', () => {
+                machine.selectProduct('Cola');
+
+                expect(machine.nextMessage).toBe('PRICE $1.00');
+                expect(machine.nextMessage).toBe('$0.95');
+            });
+
+
         });
 
 
