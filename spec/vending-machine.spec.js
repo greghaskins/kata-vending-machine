@@ -95,7 +95,7 @@ describe('The vending machine', () => {
 
     describe('selecting a cola', () => {
 
-        describe('when you have inserted sufficient money', () => {
+        describe('when you have inserted exact change', () => {
 
             beforeEach(() => {
                 machine.insertCoin(QUARTER);
@@ -109,12 +109,15 @@ describe('The vending machine', () => {
                 expect(machine.productChute).toContain('Cola');
             });
 
-            it('should display THANK YOU');
-            it('should deduct $1.00 from your balance');
+            it('should display THANK YOU, then INSERT COIN', () => {
+                machine.selectProduct('Cola');
+                expect(machine.nextMessage).toBe('THANK YOU');
+                expect(machine.nextMessage).toBe('INSERT COIN');
+            });
 
         });
 
-        describe('when you have NOT inserted sufficient money', () => {
+        describe('when you have not inserted enough money', () => {
 
             beforeEach(() => {
                 machine.insertCoin(QUARTER);
