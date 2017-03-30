@@ -36,4 +36,10 @@ describe('the product catalog', () => {
 
     });
 
+    it('is case insensitive', () => {
+        expect(catalog.priceOf('cOlA')).toEqual(catalog.priceOf('CoLa'));
+        expect(catalog.priceOf('CHIPS')).toEqual(catalog.priceOf('chips'));
+        expect(catalog.priceOf('CANdy')).toEqual(catalog.priceOf('caNDy'));
+    });
+
 });
